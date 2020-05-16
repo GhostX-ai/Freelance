@@ -20521,6 +20521,16 @@
   "RootNamespace": "FreelanceV2",
   "Documents": [
     {
+      "FilePath": "c:\\Users\\GhostX\\Desktop\\c#Projects\\FreelanceV2\\Views\\Dashboard\\AnnounmentInfo.cshtml",
+      "TargetPath": "Views\\Dashboard\\AnnounmentInfo.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\GhostX\\Desktop\\c#Projects\\FreelanceV2\\Views\\Dashboard\\Index.cshtml",
+      "TargetPath": "Views\\Dashboard\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\GhostX\\Desktop\\c#Projects\\FreelanceV2\\Views\\Shared\\_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
       "FileKind": "mvc"
@@ -20538,11 +20548,6 @@
     {
       "FilePath": "c:\\Users\\GhostX\\Desktop\\c#Projects\\FreelanceV2\\Views\\Shared\\Error.cshtml",
       "TargetPath": "Views\\Shared\\Error.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\GhostX\\Desktop\\c#Projects\\FreelanceV2\\Views\\Home\\AnnounmentInfo.cshtml",
-      "TargetPath": "Views\\Home\\AnnounmentInfo.cshtml",
       "FileKind": "mvc"
     },
     {

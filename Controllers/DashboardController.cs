@@ -1,25 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+using System;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using FreelanceV2.Models;
-using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace FreelanceV2.Controllers
 {
-    public class HomeController : Controller
+    public class DashboardController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         public IActionResult Index()
         {
             using (FreelanceContext _context = new FreelanceContext())
@@ -39,6 +27,22 @@ namespace FreelanceV2.Controllers
             }
         }
 
+        [HttpPost]
+        public IActionResult AddMyBind(Announcemants model, string text)
+        {
+            using (FreelanceContext _context = new FreelanceContext())
+            {
+                var userId = _context.Accounts.Single(a => a.Login == User.Identity.Name).Id;
+                _context.Binds.Add(new Binds(){
+                    BindText = text,
+                    UserId = userId,
+                    AnnouncemantId = model.Id
+                });
+                _context.SaveChanges();
+                return RedirectToAction("Index", "Dashboard");
+            }
+        }
+
         public JsonResult CheckAuth()
         {
             using (FreelanceContext _context = new FreelanceContext())
@@ -50,16 +54,10 @@ namespace FreelanceV2.Controllers
                 return Json(useraccess);
             }
         }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+    }
+    public class BindModel
+    {
+        public int Id { get; set; }
+        public string bindText { get; set; }
     }
 }

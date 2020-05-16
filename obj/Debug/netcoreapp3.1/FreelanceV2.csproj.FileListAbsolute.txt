@@ -73,4 +73,5 @@ C:\Users\GhostX\Desktop\c#Projects\FreelanceV2\obj\Debug\netcoreapp3.1\Razor\Are
 C:\Users\GhostX\Desktop\c#Projects\FreelanceV2\obj\Debug\netcoreapp3.1\Razor\Areas\Orderer\Views\_ViewImports.cshtml.g.cs
 C:\Users\GhostX\Desktop\c#Projects\FreelanceV2\obj\Debug\netcoreapp3.1\Razor\Areas\Orderer\Views\_ViewStart.cshtml.g.cs
 C:\Users\GhostX\Desktop\c#Projects\FreelanceV2\obj\Debug\netcoreapp3.1\Razor\Areas\Orderer\Views\Home\CreateAnnouncemant.cshtml.g.cs
-C:\Users\GhostX\Desktop\c#Projects\FreelanceV2\obj\Debug\netcoreapp3.1\Razor\Views\Home\AnnounmentInfo.cshtml.g.cs
+C:\Users\GhostX\Desktop\c#Projects\FreelanceV2\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\AnnounmentInfo.cshtml.g.cs
+C:\Users\GhostX\Desktop\c#Projects\FreelanceV2\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Index.cshtml.g.cs

@@ -27,8 +27,8 @@ namespace FreelanceV2.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                // #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog = Freelance; Integrated Security = True;");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=Freelance;Integrated Security=True");
             }
         }
 
@@ -104,6 +104,11 @@ namespace FreelanceV2.Models
 
             modelBuilder.Entity<Binds>(entity =>
             {
+                entity.Property(e => e.BindText)
+                    .IsRequired()
+                    .HasColumnName("bind_text")
+                    .HasMaxLength(1000);
+
                 entity.Property(e => e.UserId)
                     .IsRequired()
                     .HasMaxLength(128);

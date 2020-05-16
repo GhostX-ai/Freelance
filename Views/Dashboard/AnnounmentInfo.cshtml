@@ -1,0 +1,32 @@
+@model FreelanceV2.Models.Announcemants
+@{
+    ViewData["Title"] = "Подробнее";
+}
+<form asp-action="AddMyBind" asp-controller="Dashboard" asp-antiforgery="true">
+    <div class="validation" asp-asp-validation-summary="ModelOnly"></div>
+    <div class="CenterForm" id="Content">
+        <input type="hidden" asp-for="Id" value="@Model.Id" id="ID"/>
+        <div class="form-group text-center">
+            <h2>@Model.Title</h2>
+        </div>
+        <div class="form-group">
+            <p>@Model.FullDescription</p>
+        </div>
+        <div class="form-group">
+            <i>@Model.MinWage-@Model.MaxWage</i>
+            <i>@Model.Binds.Count</i>
+        </div>
+    </div>
+</form>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function ()
+    {
+        $.ajax("/Dashboard/CheckAuth/").done(function(data){
+            if(data)
+            {
+                $("#Content").append('<div class="form-group"><div><textarea name="text" class="form-control textarea"></textarea></div><div><input type="submit" class="btn btn-dark btn-outline-dark form-control" value="Оставить заявку"/></div></div>');
+            }
+        });
+    });
+</script>

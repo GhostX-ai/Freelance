@@ -8,6 +8,7 @@ namespace FreelanceV2.Models
         public int Id { get; set; }
         public string UserId { get; set; }
         public int AnnouncemantId { get; set; }
+        public string BindText { get; set; }
 
         public virtual Announcemants Announcemant { get; set; }
         public virtual Accounts User { get; set; }

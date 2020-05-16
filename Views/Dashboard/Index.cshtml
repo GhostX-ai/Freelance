@@ -1,0 +1,29 @@
+@model List<FreelanceV2.Models.Announcemants>
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div id="Dashboard">
+    @foreach (var a in Model)
+    {
+        <div class="card border-left-success shadow h-100 py-2">
+            <a asp-action="AnnounmentInfo" asp-route-id="@a.Id" asp-controller="Dashboard" class="nav-link text-dark">
+            <div class="card-body">
+                <div class="row no-gutters align-items-lg-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-uppercase mb-1">
+                            <h3>@a.Title</h3>
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            <h5>@a.WageType.WageType@a.MinWage</h5>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <h4>@a.Binds.Count</h4>
+                    </div>
+                </div>
+            </div>
+            </a>
+        </div>
+    }
+</div>
