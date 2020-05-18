@@ -17,22 +17,31 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse row">
+                    <ul class="navbar-nav flex-grow-1 col-sm-4 order-last">
+                        <li class="nav-item dropdown">
+                            <button class="dropdown-toggle btn-circle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                            <ul class="dropdown-menu" id="Account">
+                                <div id="NotAuthed">
+                                    <a class="dropdown-item text-dark" asp-area="" asp-controller="Account" asp-action="SignIn">SignIn</a>
+                                    <a class="dropdown-item text-dark" asp-area="" asp-controller="Account" asp-action="SignUp">SignUp</a>
+                                </div>
+                                <div id="Authed" class="text-center">
+                                    <div id="AuthedBody">
+                                    </div>
+                                    <div class="bottom">
+                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Account" asp-action="SignOut">SignOut</a>
+                                    </div>
+                                </div>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav flex-grow-1 col-sm-8">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="SignUp">SignUp</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="SignIn">SignIn</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="SignOut">SignOut</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Orderer" asp-controller="Home" asp-action="Index">Orders</a>
@@ -57,6 +66,28 @@
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+        $(document).ready(GetUInfo());
+        function GetUInfo()
+        {
+            $.ajax("/Account/GetUserInfo/").done(function(data){
+                if(data.firstName != null)
+                {
+                    $("#NotAuthed").hide();
+                    $("#AuthedBody").append('<i class="dropdown-item">Добро пожаловать '+data.firstName+'!</i>');
+                    $("#AuthedBody").append('<i class="dropdown-item">'+data.role+'</i>');
+                    $("#AuthedBody").append('<i class="dropdown-item">Ваш ранг:'+data.rang+'</i>');
+                    $("#AuthedBody").append('<i class="dropdown-item">Ваш опыт:'+data.skills+'</i>');
+                    $("#Authed").show();
+                }
+                else
+                {
+                    $("#Authed").hide();
+                    $("#NotAuthed").show();
+                }
+            });
+        }
+    </script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)

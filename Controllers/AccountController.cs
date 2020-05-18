@@ -49,7 +49,7 @@ namespace FreelanceV2.Controllers
                     await _context.Accounts.AddAsync(us);
                     await _context.SaveChangesAsync();
                     await Authenticate(us);
-                    
+
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -90,6 +90,27 @@ namespace FreelanceV2.Controllers
             };
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+        }
+        public JsonResult GetUserInfo()
+        {
+            using (FreelanceContext _context = new FreelanceContext())
+            {
+                var model = _context.Accounts.Include(a => a.Role).Include(a => a.Rang).SingleOrDefault(a => a.Login == User.Identity.Name);
+                UserInfo ui = new UserInfo();
+                if (model != null)
+                {
+                    ui = new UserInfo()
+                    {
+                        FirstName = model.FirstName,
+                        Login = model.Login,
+                        Role = model.Role.Role,
+                        ImagePath = model.PhotoPath,
+                        Rang = model.Rang.Rang,
+                        Skills = model.SkillPoints.ToString()
+                    };
+                }
+                return ui != null ? Json(ui) : Json("No");
+            }
         }
         public async Task<IActionResult> SignOut()
         {
