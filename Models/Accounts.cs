@@ -24,6 +24,7 @@ namespace FreelanceV2.Models
         public string Information { get; set; }
         public DateTime BirthDate { get; set; }
         public int RangId { get; set; }
+        public DateTime RagisterDate { get; set; }
 
         public virtual Genders Gender { get; set; }
         public virtual Rangs Rang { get; set; }

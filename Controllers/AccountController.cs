@@ -44,7 +44,8 @@ namespace FreelanceV2.Controllers
                         GenderId = model.GenderId,
                         RoleId = model.RoleId,
                         BirthDate = model.BirthDate,
-                        RangId = 1
+                        RangId = 1,
+                        RagisterDate = DateTime.Now.Date
                     };
                     await _context.Accounts.AddAsync(us);
                     await _context.SaveChangesAsync();

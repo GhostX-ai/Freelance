@@ -4,10 +4,15 @@ using System.Linq;
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.IO;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FreelanceV2.Areas.Orderer.Controllers
 {
     [Area("Orderer")]
+    [Authorize(Roles = "Заказчик")]
     public class HomeController : Controller
     {
         public IActionResult Index()
@@ -28,18 +33,19 @@ namespace FreelanceV2.Areas.Orderer.Controllers
             }
         }
         [HttpPost]
-        public IActionResult CreateAnnouncemant(Announcemants model, string NewWage)
+        public IActionResult CreateAnnouncemant(Announcemants model, IFormFile file)
         {
             using (FreelanceContext _context = new FreelanceContext())
             {
-                if (NewWage != null)
+                string dirpath = Path.GetFullPath("/files/");
+                if (!Directory.Exists(dirpath))
                 {
-                    _context.WagesType.Add(new WagesType()
-                    {
-                        WageType = NewWage
-                    });
-                    _context.SaveChanges();
-                    model.WageTypeId = _context.WagesType.First(w => w.WageType == NewWage).Id;
+                    Directory.CreateDirectory(dirpath);
+                }
+                string path = dirpath + file.FileName;
+                using (var stream = System.IO.File.Create(path))
+                {
+                    file.CopyTo(stream);
                 }
                 model.UserId = _context.Accounts.Single(a => a.Login == User.Identity.Name).Id;
                 _context.Announcemants.Add(new Announcemants()
@@ -49,10 +55,13 @@ namespace FreelanceV2.Areas.Orderer.Controllers
                     MinWage = model.MinWage,
                     Title = model.Title,
                     UserId = model.UserId,
-                    WageTypeId = model.WageTypeId
+                    WageTypeId = model.WageTypeId,
+                    Deadline = model.Deadline,
+                    PublicDate = DateTime.Now.Date,
+                    FilePath = path,
                 });
                 _context.SaveChanges();
-                return View();
+                return RedirectToAction("Index");
             }
         }
     }

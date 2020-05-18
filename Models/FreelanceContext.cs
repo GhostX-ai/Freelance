@@ -58,6 +58,8 @@ namespace FreelanceV2.Models
                     .IsRequired()
                     .HasMaxLength(128);
 
+                entity.Property(e => e.RagisterDate).HasColumnType("date");
+
                 entity.HasOne(d => d.Gender)
                     .WithMany(p => p.Accounts)
                     .HasForeignKey(d => d.GenderId)
@@ -80,6 +82,8 @@ namespace FreelanceV2.Models
             modelBuilder.Entity<Announcemants>(entity =>
             {
                 entity.Property(e => e.FullDescription).IsRequired();
+
+                entity.Property(e => e.PublicDate).HasColumnType("date");
 
                 entity.Property(e => e.Title)
                     .IsRequired()
