@@ -8,6 +8,7 @@ namespace FreelanceV2.Models
         public string ImagePath { get; set; }
         public string Rang { get; set; }
         public string Skills { get; set; }
+        public string BindText { get; set; }
         public UserInfo()
         {
 

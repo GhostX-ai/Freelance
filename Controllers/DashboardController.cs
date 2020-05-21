@@ -12,7 +12,7 @@ namespace FreelanceV2.Controllers
         {
             using (FreelanceContext _context = new FreelanceContext())
             {
-                var announcemants = _context.Announcemants.Include(i => i.WageType).ToList();
+                var announcemants = _context.Announcemants.Include(i => i.WageType).Include(i=> i.Binds).ToList();
                 return View(announcemants);
             }
         }
@@ -22,7 +22,7 @@ namespace FreelanceV2.Controllers
         {
             using (FreelanceContext _context = new FreelanceContext())
             {
-                var model = _context.Announcemants.Include(p => p.User).Include(p => p.Binds).Single(a => a.Id == id);
+                var model = _context.Announcemants.Include(p => p.Binds).Include(p => p.User).Single(a => a.Id == id);
                 return View(model);
             }
         }

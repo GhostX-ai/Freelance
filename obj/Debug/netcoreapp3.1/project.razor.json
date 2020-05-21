@@ -20526,6 +20526,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\GhostX\\Desktop\\c#Projects\\FreelanceV2\\Areas\\Orderer\\Views\\Home\\AnnounmentInfo.cshtml",
+      "TargetPath": "Areas\\Orderer\\Views\\Home\\AnnounmentInfo.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\GhostX\\Desktop\\c#Projects\\FreelanceV2\\Views\\Dashboard\\Index.cshtml",
       "TargetPath": "Views\\Dashboard\\Index.cshtml",
       "FileKind": "mvc"

@@ -64,5 +64,26 @@ namespace FreelanceV2.Areas.Orderer.Controllers
                 return RedirectToAction("Index");
             }
         }
+        [HttpGet]
+        public IActionResult AnnounmentInfo(int id)
+        {
+            using (FreelanceContext _context = new FreelanceContext())
+            {
+                var Tprogramers = _context.Binds.Include(b => b.User).Include(b => b.User.Rang).Where(b => b.AnnouncemantId == id).ToList();
+                List<UserInfo> programers = new List<UserInfo>();
+                Tprogramers.ForEach(b=>
+                {
+                    programers.Add(new UserInfo()
+                    {
+                        BindText = b.BindText,
+                        FirstName = b.User.FirstName,
+                        ImagePath = b.User.PhotoPath,
+                        Rang = b.User.Rang.Rang,
+                        Skills = b.User.SkillPoints.ToString()
+                    });
+                });
+                return View(programers);
+            }
+        }
     }
 }

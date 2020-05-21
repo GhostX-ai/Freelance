@@ -6,7 +6,7 @@
 <div class="CenterForm">
     @foreach(var a in Model)
     {
-        <a asp-action="AnnounmentInfo" class="text-dark nav-link" asp-controller="Home">
+        <a asp-action="AnnounmentInfo" asp-route-id="@a.Id" class="text-dark nav-link" asp-controller="Home">
             <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-lg-center">
